@@ -1,4 +1,4 @@
-package com.dsjk.boot.service.user.config;
+package com.dsjk.boot.common.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

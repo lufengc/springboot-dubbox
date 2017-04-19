@@ -1,8 +1,8 @@
 logging:
-  file: logs/cloud-web.log
+  file: logs/boot-web.log
   level:
     root: info
-    com.dsjk.platform: debug
+    com.dsjk.boot.web: debug
 
 server:
   port: 8080
@@ -20,6 +20,6 @@ dubbo:
   protocol-name: dubbo
   protocol-port: 20882
   registry-protocol: zookeeper
-  registry-address: zookeeper://127.0.0.1:2181
+  registry-address: zookeeper://127.0.0.1:2181?register=false
 
 
