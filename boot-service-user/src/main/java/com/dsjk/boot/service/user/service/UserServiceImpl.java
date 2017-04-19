@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Service(interfaceClass = UserService.class, group = Global.DUBBO_GROUP)
-public class UserServiceImpl extends BaseService implements UserService {
+public class UserServiceImpl extends BaseService<SysUser> implements UserService {
 
     @Autowired
     private UserMapper userMapper;
