@@ -8,6 +8,7 @@ import com.dsjk.boot.common.service.user.UserService;
 import com.dsjk.boot.service.user.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
  * @version 2017/2/28
  */
 @Component
+@Transactional(readOnly = true)
 @Service(interfaceClass = UserService.class, group = Global.DUBBO_GROUP)
 public class UserServiceImpl extends BaseService<SysUser> implements UserService {
 
@@ -24,5 +26,12 @@ public class UserServiceImpl extends BaseService<SysUser> implements UserService
     @Override
     public SysUser getUserBySql(String id) {
         return userMapper.getUserBySql(id);
+    }
+
+    @Override
+    @Transactional
+    public int save(SysUser entity) {
+        super.save(entity);
+        return 1;
     }
 }
