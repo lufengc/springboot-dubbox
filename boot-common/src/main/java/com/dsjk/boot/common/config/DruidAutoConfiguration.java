@@ -38,10 +38,10 @@ public class DruidAutoConfiguration {
     @Bean
     public DataSource dataSource() {
         DruidDataSource datasource = new DruidDataSource();
+        datasource.setDriverClassName(properties.getDriverClassName());
         datasource.setUrl(properties.getUrl());
         datasource.setUsername(properties.getUsername());
         datasource.setPassword(properties.getPassword());
-        datasource.setDriverClassName(properties.getDriverClassName());
 
         datasource.setInitialSize(properties.getInitialSize());
         datasource.setMinIdle(properties.getMinIdle());

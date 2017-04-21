@@ -22,9 +22,6 @@ public class DruidProperties {
     private boolean testWhileIdle;
     private boolean testOnBorrow;
     private boolean testOnReturn;
-    private boolean removeAbandoned;
-    private long removeAbandonedTimeout;
-    private boolean logAbandoned;
     private boolean poolPreparedStatements;
     private int maxPoolPreparedStatementPerConnectionSize;
     private String filters;
@@ -139,30 +136,6 @@ public class DruidProperties {
 
     public void setTestOnReturn(boolean testOnReturn) {
         this.testOnReturn = testOnReturn;
-    }
-
-    public boolean isRemoveAbandoned() {
-        return removeAbandoned;
-    }
-
-    public void setRemoveAbandoned(boolean removeAbandoned) {
-        this.removeAbandoned = removeAbandoned;
-    }
-
-    public long getRemoveAbandonedTimeout() {
-        return removeAbandonedTimeout;
-    }
-
-    public void setRemoveAbandonedTimeout(long removeAbandonedTimeout) {
-        this.removeAbandonedTimeout = removeAbandonedTimeout;
-    }
-
-    public boolean isLogAbandoned() {
-        return logAbandoned;
-    }
-
-    public void setLogAbandoned(boolean logAbandoned) {
-        this.logAbandoned = logAbandoned;
     }
 
     public boolean isPoolPreparedStatements() {
