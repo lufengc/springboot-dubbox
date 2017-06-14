@@ -102,6 +102,12 @@
             <artifactId>druid</artifactId>
             <version>1.0.5</version>
         </dependency>
+        <!--mybatis-->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>1.2.0</version>
+        </dependency>
         <!--mapper-->
         <dependency>
             <groupId>tk.mybatis</groupId>

@@ -2,7 +2,7 @@ package com.dsjk.boot.web.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.dsjk.boot.common.base.Global;
-import com.dsjk.boot.common.bean.user.SysUser;
+import com.dsjk.boot.common.bean.user.User;
 import com.dsjk.boot.common.service.user.UserService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.ApiImplicitParam;
@@ -26,43 +26,43 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/sql/{id}", method = RequestMethod.GET)
-    public SysUser getBySql(@PathVariable String id) {
+    public User getBySql(@PathVariable String id) {
         return userService.getUserBySql(id);
     }
 
     @ApiOperation(value="获取用户详细信息", notes="根据url的id来获取用户详细信息")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public SysUser get(@PathVariable String id) {
+    public User get(@PathVariable String id) {
         return userService.get(id);
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public SysUser get(SysUser user) {
+    public User get(User user) {
         return userService.get(user);
     }
 
     @ApiOperation(value="获取用户列表", notes="")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<SysUser> getList(SysUser user) {
+    public List<User> getList(User user) {
         return userService.getList(user);
     }
 
     @RequestMapping(value = "/page", method = RequestMethod.GET)
-    public PageInfo<SysUser> getPage(SysUser user) {
+    public PageInfo<User> getPage(User user) {
         return userService.getPage(user);
     }
 
     @ApiOperation(value="创建用户", notes="根据User对象创建用户")
-    @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "SysUser")
+    @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public void save(SysUser user) {
+    public void save(User user) {
         userService.save(user);
     }
 
     @ApiOperation(value="删除用户", notes="根据url的id来指定删除对象")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public void delete(SysUser user) {
+    public void delete(User user) {
         userService.delete(user);
     }
 }

@@ -1,16 +1,13 @@
 package com.dsjk.boot.service.user;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Repository;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.dsjk.boot.common,com.dsjk.boot.service.user")
-@MapperScan(basePackages = "com.dsjk.boot.service.user.mapper", annotationClass = Repository.class)
+@ComponentScan(basePackages = "com.dsjk.boot.common, com.dsjk.boot.service.user")
 public class UserApplication {
 
     private static final Logger logger = LoggerFactory.getLogger(UserApplication.class);

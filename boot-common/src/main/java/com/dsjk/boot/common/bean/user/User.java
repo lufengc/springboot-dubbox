@@ -3,26 +3,31 @@ package com.dsjk.boot.common.bean.user;
 
 import com.dsjk.boot.common.base.DataEntity;
 
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
  * @author fengcheng
  * @version 2017/2/28
  */
-public class SysUser extends DataEntity<SysUser> {
+@Table(name = "sys_user")
+public class User extends DataEntity<User> {
 
-    private String companyId;
-    private String officeId;
-    private String loginName;
-    private String password;
-    private String no;
-    private String name;
-    private String email;
-    private String mobile;
-    private String photo;
-    private String loginIp;
-    private Date loginDate;
-    private String loginFlag;
+    private static final long serialVersionUID = 1L;
+    private String companyId;    // 归属公司
+    private String officeId;    // 归属部门
+    private String loginName;// 登录名
+    private String password;// 密码
+    private String no;        // 工号
+    private String name;    // 姓名
+    private String email;    // 邮箱
+    private String phone;    // 电话
+    private String mobile;    // 手机
+    private String userType;// 用户类型
+    private String loginIp;    // 最后登陆IP
+    private Date loginDate;    // 最后登陆日期
+    private String loginFlag;    // 是否允许登陆
+    private String photo;    // 头像
 
     public String getCompanyId() {
         return companyId;
@@ -80,6 +85,14 @@ public class SysUser extends DataEntity<SysUser> {
         this.email = email;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getMobile() {
         return mobile;
     }
@@ -88,12 +101,12 @@ public class SysUser extends DataEntity<SysUser> {
         this.mobile = mobile;
     }
 
-    public String getPhoto() {
-        return photo;
+    public String getUserType() {
+        return userType;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     public String getLoginIp() {
@@ -118,5 +131,13 @@ public class SysUser extends DataEntity<SysUser> {
 
     public void setLoginFlag(String loginFlag) {
         this.loginFlag = loginFlag;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }
