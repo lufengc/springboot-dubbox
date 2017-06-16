@@ -21,6 +21,7 @@ import java.util.regex.Pattern;
  */
 public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
+    private static final char SEPARATOR = '_';
     private static final String CHARSET_NAME = "UTF-8";
 
     /**
@@ -259,6 +260,67 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         if (isNotBlank(source)) {
             target = source;
         }
+    }
+
+    /**
+     * 驼峰命名法工具
+     * @return
+     * 		toCamelCase("hello_world") == "helloWorld"
+     * 		toCapitalizeCamelCase("hello_world") == "HelloWorld"
+     * 		toUnderScoreCase("helloWorld") = "hello_world"
+     */
+    public static String toCamelCase(String s) {
+        if (s == null) {
+            return null;
+        }
+        s = s.toLowerCase();
+        StringBuilder sb = new StringBuilder(s.length());
+        boolean upperCase = false;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+
+            if (c == SEPARATOR) {
+                upperCase = true;
+            } else if (upperCase) {
+                sb.append(Character.toUpperCase(c));
+                upperCase = false;
+            } else {
+                sb.append(c);
+            }
+        }
+
+        return sb.toString();
+    }
+
+    /**
+     * 驼峰命名法工具
+     * @return
+     * 		toCamelCase("hello_world") == "helloWorld"
+     * 		toCapitalizeCamelCase("hello_world") == "HelloWorld"
+     * 		toUnderScoreCase("helloWorld") = "hello_world"
+     */
+    public static String toCapitalizeCamelCase(String s) {
+        if (s == null) {
+            return null;
+        }
+        s = toCamelCase(s);
+        return s.substring(0, 1).toUpperCase() + s.substring(1);
+    }
+
+    /**
+     * 驼峰命名法工具
+     * @return
+     * 		toCamelCase("hello_world") == "helloWorld"
+     * 		toCapitalizeCamelCase("hello_world") == "HelloWorld"
+     * 		toUnderScoreCase("helloWorld") = "hello_world"
+     */
+    public static String toUnderScoreCase(String s) {
+        if (s == null) {
+            return null;
+        }
+        return s.replaceAll(String.format("%s|%s|%s",
+                "(?<=[A-Z])(?=[A-Z][a-z])", "(?<=[^A-Z])(?=[A-Z])",
+                "(?<=[A-Za-z])(?=[^A-Za-z])"), "_").toLowerCase();
     }
 
     /**

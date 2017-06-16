@@ -2,6 +2,8 @@ package com.dsjk.boot.web.user;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.dsjk.boot.common.base.Global;
+import com.dsjk.boot.common.base.Result;
+import com.dsjk.boot.common.base.ResultCode;
 import com.dsjk.boot.common.bean.user.User;
 import com.dsjk.boot.common.service.user.UserService;
 import com.github.pagehelper.PageInfo;
@@ -25,44 +27,42 @@ public class UserController {
     @Reference(group = Global.DUBBO_GROUP)
     private UserService userService;
 
-    @RequestMapping(value = "/sql/{id}", method = RequestMethod.GET)
-    public User getBySql(@PathVariable String id) {
-        return userService.getUserBySql(id);
+    @ApiOperation(value="获取用户信息")
+    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "String")
+    @RequestMapping(value = "/getBySql", method = RequestMethod.GET)
+    public Result getBySql(String id) {
+        User user = userService.getUserBySql(id);
+        return Result.of(user);
     }
 
-    @ApiOperation(value="获取用户详细信息", notes="根据url的id来获取用户详细信息")
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public User get(@PathVariable String id) {
-        return userService.get(id);
+    @ApiOperation(value="获取用户信息")
+    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "String")
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    public Result get(String id) {
+        User user = userService.get(id);
+        return Result.of(user);
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public User get(User user) {
-        return userService.get(user);
-    }
-
-    @ApiOperation(value="获取用户列表", notes="")
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<User> getList(User user) {
-        return userService.getList(user);
-    }
-
+    @ApiOperation(value="获取用户分页")
     @RequestMapping(value = "/page", method = RequestMethod.GET)
-    public PageInfo<User> getPage(User user) {
-        return userService.getPage(user);
+    public Result getPage(User user) {
+        PageInfo<User> page = userService.getPage(user);
+        return Result.of(page);
     }
 
-    @ApiOperation(value="创建用户", notes="根据User对象创建用户")
+    @ApiOperation(value="创建用户")
     @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public void save(User user) {
+    public Result save(User user) {
         userService.save(user);
+        return Result.of(ResultCode.SUCCESS);
     }
 
-    @ApiOperation(value="删除用户", notes="根据url的id来指定删除对象")
-    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long")
+    @ApiOperation(value="删除用户")
+    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "String")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public void delete(User user) {
-        userService.delete(user);
+    public Result delete(String id) {
+        userService.delete(new User());
+        return Result.of(ResultCode.SUCCESS);
     }
 }

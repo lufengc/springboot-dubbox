@@ -27,7 +27,7 @@ druid:
 
 # MyBatis
 mybatis:
-  mapperLocations: classpath:/mapper/**/*.xml
+  # mapperLocations: classpath:/mapper/**/*.xml
   type-aliases-package: com.dsjk.boot.common.bean
   configuration:
     map-underscore-to-camel-case: true

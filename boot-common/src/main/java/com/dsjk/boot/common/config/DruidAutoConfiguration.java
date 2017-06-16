@@ -26,8 +26,6 @@ import java.sql.SQLException;
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)
 public class DruidAutoConfiguration {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
-
     private final DruidProperties properties;
 
     @Autowired
@@ -57,8 +55,9 @@ public class DruidAutoConfiguration {
         datasource.setMaxPoolPreparedStatementPerConnectionSize(properties.getMaxPoolPreparedStatementPerConnectionSize());
         try {
             datasource.setFilters(properties.getFilters());
+            datasource.init();
         } catch (SQLException e) {
-            logger.error("druid configuration initialization filter", e);
+            throw new RuntimeException(e);
         }
         return datasource;
     }

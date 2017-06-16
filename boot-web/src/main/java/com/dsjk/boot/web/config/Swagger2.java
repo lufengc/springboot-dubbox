@@ -28,10 +28,8 @@ public class Swagger2 {
     }
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("接口文档")
-                .description("更多信息请联系管理员")
-                .termsOfServiceUrl("http://www.bdfint.com")
-                .contact("lufengc")
+                .title("APP接口文档")
+                .contact("fengcheng")
                 .version("1.0")
                 .build();
     }

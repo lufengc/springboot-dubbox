@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.dsjk.boot.common, com.dsjk.boot.service.user")
+@ComponentScan(basePackages = "com.dsjk.boot")
 public class UserApplication {
 
     private static final Logger logger = LoggerFactory.getLogger(UserApplication.class);
