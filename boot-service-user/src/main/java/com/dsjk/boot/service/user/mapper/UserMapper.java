@@ -13,5 +13,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserMapper extends CommonMapper<User> {
 
-    User getUserBySql(String id);
 }

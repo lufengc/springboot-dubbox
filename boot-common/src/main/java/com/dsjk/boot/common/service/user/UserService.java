@@ -12,5 +12,5 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface UserService extends BaseService<User> {
-    User getUserBySql(String id);
+    void save(User user);
 }

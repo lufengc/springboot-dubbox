@@ -12,14 +12,6 @@ import java.util.List;
 public interface BaseService<T> {
 
     /**
-     * 数据插入或更新操作
-     * 由业务类实现
-     *
-     * @param object T
-     */
-    String save(T object) throws Exception;
-
-    /**
      * 新增entity
      *
      * @param object T

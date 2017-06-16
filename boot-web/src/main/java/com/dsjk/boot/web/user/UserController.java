@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -29,31 +30,23 @@ public class UserController {
 
     @ApiOperation(value="获取用户信息")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "String")
-    @RequestMapping(value = "/getBySql", method = RequestMethod.GET)
-    public Result getBySql(String id) {
-        User user = userService.getUserBySql(id);
-        return Result.of(user);
-    }
-
-    @ApiOperation(value="获取用户信息")
-    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "String")
     @RequestMapping(value = "/get", method = RequestMethod.GET)
-    public Result get(String id) {
+    public Result get(String id) throws Exception {
         User user = userService.get(id);
         return Result.of(user);
     }
 
     @ApiOperation(value="获取用户分页")
     @RequestMapping(value = "/page", method = RequestMethod.GET)
-    public Result getPage(User user) {
-        PageInfo<User> page = userService.getPage(user);
+    public Result getPage(User user) throws Exception {
+        PageInfo<User> page = userService.getPage(user, new Example(User.class));
         return Result.of(page);
     }
 
     @ApiOperation(value="创建用户")
     @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public Result save(User user) {
+    public Result save(User user) throws Exception {
         userService.save(user);
         return Result.of(ResultCode.SUCCESS);
     }
@@ -61,8 +54,8 @@ public class UserController {
     @ApiOperation(value="删除用户")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "String")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public Result delete(String id) {
-        userService.delete(new User());
+    public Result delete(String id) throws Exception {
+        userService.delete(id);
         return Result.of(ResultCode.SUCCESS);
     }
 }

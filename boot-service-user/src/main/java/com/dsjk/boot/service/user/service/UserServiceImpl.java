@@ -21,13 +21,9 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     @Autowired
     private UserMapper userMapper;
 
-    @Override
-    public User getUserBySql(String id) {
-        return userMapper.getUserBySql(id);
-    }
 
     @Override
-    public String save(User object) throws Exception {
-        return null;
+    public void save(User user) {
+
     }
 }

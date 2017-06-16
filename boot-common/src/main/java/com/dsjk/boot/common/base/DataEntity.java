@@ -3,6 +3,9 @@
  */
 package com.dsjk.boot.common.base;
 
+import com.dsjk.boot.common.utils.Encodes;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Date;
 
 /**
@@ -15,16 +18,45 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 
 	private static final long serialVersionUID = 1L;
 
-	protected String remarks;	// 备注
-	protected String createBy;	// 创建者
-	protected Date createDate;	// 创建日期
-	protected String updateBy;	// 更新者
-	protected Date updateDate;	// 更新日期
-	protected String delFlag; 	// 删除标记（0：正常；1：删除；2：审核）
+	protected String remarks;    // 备注
+	protected String createBy;    // 创建者
+	protected Date createDate;    // 创建日期
+	protected String updateBy;    // 更新者
+	protected Date updateDate;    // 更新日期
+	protected String delFlag;    // 删除标记（0：正常；1：删除；2：审核）
 
 	public DataEntity() {
 		super();
 		this.delFlag = DEL_FLAG_NORMAL;
+	}
+
+	/**
+	 * 插入之前执行方法，需要手动调用
+	 */
+	public void preInsert() {
+		setId(Encodes.uuid());
+		String userId = "";
+		if (StringUtils.isNotBlank(userId)) {
+			this.updateBy = userId;
+			this.createBy = userId;
+		}
+		this.updateDate = new Date();
+		this.createDate = this.updateDate;
+	}
+
+	/**
+	 * 更新之前执行方法，需要手动调用
+	 */
+	public void preUpdate() {
+		String userId = "";
+		if (StringUtils.isNotBlank(userId)) {
+			this.updateBy = userId;
+		}
+		this.updateDate = new Date();
+	}
+
+	public DataEntity(String id) {
+		super(id);
 	}
 
 	public String getRemarks() {
