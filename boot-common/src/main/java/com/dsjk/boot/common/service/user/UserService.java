@@ -1,6 +1,6 @@
 package com.dsjk.boot.common.service.user;
 
-import com.dsjk.boot.common.base.BaseServiceI;
+import com.dsjk.boot.common.base.BaseService;
 import com.dsjk.boot.common.bean.user.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
  */
 @Mapper
 @Repository
-public interface UserService extends BaseServiceI<User> {
+public interface UserService extends BaseService<User> {
     User getUserBySql(String id);
 }

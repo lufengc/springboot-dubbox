@@ -24,6 +24,11 @@ public class Global {
     public static final String FALSE = "false";
 
     /**
+     * 列表中每页默认显示条数
+     */
+    static final int PAGE_SIZE = 10;
+
+    /**
      * dubbo 分组名称
      */
     public static final String DUBBO_GROUP = "dubbo_group";

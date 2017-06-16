@@ -2,6 +2,7 @@ package com.dsjk.boot.service.user.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.dsjk.boot.common.base.BaseService;
+import com.dsjk.boot.common.base.BaseServiceImpl;
 import com.dsjk.boot.common.base.Global;
 import com.dsjk.boot.common.bean.user.User;
 import com.dsjk.boot.common.service.user.UserService;
@@ -15,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @version 2017/2/28
  */
 @Service(interfaceClass = UserService.class, group = Global.DUBBO_GROUP)
-public class UserServiceImpl extends BaseService<User> implements UserService {
+public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
 
     @Autowired
     private UserMapper userMapper;
@@ -26,9 +27,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     }
 
     @Override
-    @Transactional
-    public int save(User entity) {
-        super.save(entity);
-        return 1;
+    public String save(User object) throws Exception {
+        return null;
     }
 }

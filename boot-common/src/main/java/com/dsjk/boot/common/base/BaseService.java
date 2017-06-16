@@ -1,60 +1,68 @@
 package com.dsjk.boot.common.base;
 
-import com.dsjk.boot.common.utils.IdWorker;
-import com.dsjk.boot.common.utils.StringUtils;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.common.Mapper;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
 /**
  * @author fengcheng
- * @version 2017/3/26
+ * @version 2017/4/19
  */
-@Service
-public abstract class BaseService<T extends DataEntity<T>> implements BaseServiceI<T> {
+public interface BaseService<T> {
 
-    @SuppressWarnings("SpringJavaAutowiringInspection")
-    @Autowired
-    protected Mapper<T> mapper;
+    /**
+     * 数据插入或更新操作
+     * 由业务类实现
+     *
+     * @param object T
+     */
+    String save(T object) throws Exception;
 
-    @Override
-    public T get(String id) {
-        return mapper.selectByPrimaryKey(id);
-    }
+    /**
+     * 新增entity
+     *
+     * @param object T
+     * @return 主键ID
+     */
+    int insert(T object) throws Exception;
 
-    @Override
-    public T get(T entity) {
-        return mapper.selectOne(entity);
-    }
+    /**
+     * 修改entity
+     *
+     * @param object T
+     */
+    void update(T object) throws Exception;
 
-    @Override
-    public List<T> getList(T entity) {
-        return mapper.select(entity);
-    }
+    /**
+     * 删除entity
+     *
+     * @param ids 删除的ID
+     * @return 删除数量
+     */
+    int delete(String ids) throws Exception;
 
-    @Override
-    public PageInfo<T> getPage(T entity) {
-        PageHelper.startPage(entity.getPageNum(), entity.getPageSize());
-        List<T> list = mapper.select(entity);
-        return new PageInfo<>(list);
-    }
+    /**
+     * 获取对象
+     *
+     * @param id 主键ID
+     * @return T
+     */
+    T get(Object id) throws Exception;
 
-    @Override
-    public int save(T entity) {
-        if (StringUtils.isEmpty(entity.getId())) {
-            entity.setId(IdWorker.getId() + "");
-            return mapper.insertSelective(entity);
-        } else {
-            return mapper.updateByPrimaryKeySelective(entity);
-        }
-    }
+    /**
+     * 获取列表
+     *
+     * @param object 要查询的对象
+     * @return List<T>
+     */
+    List<T> getList(T object) throws Exception;
 
-    @Override
-    public int delete(T entity) {
-        return mapper.delete(entity);
-    }
+
+    /**
+     * @param object 要查询的对象
+     * @param example Example
+     * @return PageInfo<T>
+     */
+    PageInfo<T> getPage(T object, Example example) throws Exception;
 }
