@@ -28,34 +28,33 @@ public class UserController {
     @Reference(group = Global.DUBBO_GROUP)
     private UserService userService;
 
-    @ApiOperation(value="获取用户信息")
-    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "String")
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public Result get(String id) throws Exception {
         User user = userService.get(id);
         return Result.of(user);
     }
 
-    @ApiOperation(value="获取用户分页")
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public Result getList(User user) throws Exception {
+        List<User> list = userService.getList(user);
+        return Result.of(list);
+    }
+
     @RequestMapping(value = "/page", method = RequestMethod.GET)
     public Result getPage(User user) throws Exception {
-        PageInfo<User> page = userService.getPage(user, new Example(User.class));
+        PageInfo<User> page = userService.getPage(user);
         return Result.of(page);
     }
 
-    @ApiOperation(value="创建用户")
-    @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public Result save(User user) throws Exception {
         userService.save(user);
         return Result.of(ResultCode.SUCCESS);
     }
 
-    @ApiOperation(value="删除用户")
-    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "String")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public Result delete(String id) throws Exception {
-        userService.delete(id);
+    public Result delete(String ids) throws Exception {
+        userService.delete(ids);
         return Result.of(ResultCode.SUCCESS);
     }
 }

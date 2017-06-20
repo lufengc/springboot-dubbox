@@ -20,11 +20,9 @@ public abstract class BaseEntity<T> implements Serializable {
     protected String id;
 
     @Transient
-    protected Integer pageNum = 1;
-
+    protected int pageNum = 1;
     @Transient
-    protected Integer pageSize;
-
+    protected int pageSize;
     @Transient
     protected String orderBy;
 
@@ -45,20 +43,28 @@ public abstract class BaseEntity<T> implements Serializable {
         this.id = id;
     }
 
-    public Integer getPageNum() {
+    public int getPageNum() {
         return pageNum;
     }
 
-    public void setPageNum(Integer pageNum) {
+    public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
     }
 
-    public Integer getPageSize() {
+    public int getPageSize() {
         return pageSize;
     }
 
-    public void setPageSize(Integer pageSize) {
+    public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
     }
 
     @Override

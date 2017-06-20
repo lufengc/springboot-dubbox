@@ -26,7 +26,7 @@ public class Global {
     /**
      * 列表中每页默认显示条数
      */
-    static final int PAGE_SIZE = 10;
+    public static final int PAGE_SIZE = 10;
 
     /**
      * dubbo 分组名称
