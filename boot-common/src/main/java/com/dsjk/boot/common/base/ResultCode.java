@@ -9,8 +9,7 @@ package com.dsjk.boot.common.base;
 public enum ResultCode {
 
     SUCCESS("0", "处理成功"),
-    FAILD("10000", "处理失败"),
-    EXCEPTION("20000", "服务处理异常"),;
+    FAILD("10000", "处理失败"),;
 
     private String code;
     private String message;

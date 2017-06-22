@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.dsjk.boot.common.base.Global;
 import com.dsjk.boot.common.bean.user.User;
 import com.dsjk.boot.common.service.user.UserService;
+import com.dsjk.boot.common.utils.Encodes;
 import com.dsjk.boot.common.utils.StringUtils;
 import com.dsjk.boot.service.user.mapper.UserMapper;
 import com.github.pagehelper.PageHelper;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -47,10 +49,14 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void save(User user) {
         if (StringUtils.isNotEmpty(user.getId())) {
-            user.preUpdate();
+            user.preUpdate(user.getId());
             userMapper.updateByPrimaryKeySelective(user);
         } else {
-            user.preInsert();
+            user.setId(Encodes.uuid());
+            user.setUpdateBy(user.getId());
+            user.setCreateBy(user.getId());
+            user.setUpdateDate(new Date());
+            user.setCreateDate(user.getUpdateDate());
             userMapper.insertSelective(user);
         }
     }

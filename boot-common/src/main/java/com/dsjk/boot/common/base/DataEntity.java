@@ -3,6 +3,7 @@
  */
 package com.dsjk.boot.common.base;
 
+import com.dsjk.boot.common.bean.user.User;
 import com.dsjk.boot.common.utils.Encodes;
 import org.apache.commons.lang3.StringUtils;
 
@@ -33,9 +34,8 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 	/**
 	 * 插入之前执行方法，需要手动调用
 	 */
-	public void preInsert() {
+	public void preInsert(String userId) {
 		setId(Encodes.uuid());
-		String userId = "";
 		if (StringUtils.isNotBlank(userId)) {
 			this.updateBy = userId;
 			this.createBy = userId;
@@ -47,8 +47,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 	/**
 	 * 更新之前执行方法，需要手动调用
 	 */
-	public void preUpdate() {
-		String userId = "";
+	public void preUpdate(String userId) {
 		if (StringUtils.isNotBlank(userId)) {
 			this.updateBy = userId;
 		}
