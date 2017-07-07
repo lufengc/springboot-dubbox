@@ -9,7 +9,7 @@ server:
 
 spring:
   application:
-    name: cloud-web
+    name: boot-web
   aop:
     proxy-target-class: true
 

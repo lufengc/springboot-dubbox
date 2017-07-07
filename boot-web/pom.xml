@@ -12,7 +12,6 @@
     <artifactId>boot-web</artifactId>
 
     <dependencies>
-
         <dependency>
             <groupId>com.dsjk</groupId>
             <artifactId>boot-common</artifactId>
@@ -43,12 +42,17 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.14</version>
         </dependency>
+
 
 
     </dependencies>
