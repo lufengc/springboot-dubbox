@@ -6,6 +6,7 @@ import com.dsjk.boot.common.base.Result;
 import com.dsjk.boot.common.base.ResultCode;
 import com.dsjk.boot.common.bean.user.User;
 import com.dsjk.boot.common.service.user.UserService;
+import com.dsjk.boot.web.base.BaseController;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,38 +20,33 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sys/user")
-public class UserController {
+public class UserController extends BaseController {
 
     @Reference(group = Global.DUBBO_GROUP)
     private UserService userService;
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public Result get(String id) throws Exception {
-        User user = userService.get(id);
-        return Result.of(user);
+        return userService.get(id);
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public Result getList(User user) throws Exception {
-        List<User> list = userService.getList(user);
-        return Result.of(list);
+        return userService.getList(user);
     }
 
     @RequestMapping(value = "/page", method = RequestMethod.GET)
     public Result getPage(User user) throws Exception {
-        PageInfo<User> page = userService.getPage(user);
-        return Result.of(page);
+        return userService.getPage(user);
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public Result save(User user) throws Exception {
-        userService.save(user);
-        return Result.of(ResultCode.SUCCESS);
+        return userService.save(user);
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public Result delete(String ids) throws Exception {
-        userService.delete(ids);
-        return Result.of(ResultCode.SUCCESS);
+        return userService.delete(ids);
     }
 }

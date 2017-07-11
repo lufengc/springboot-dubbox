@@ -2,8 +2,11 @@ package com.dsjk.boot.common.bean.user;
 
 
 import com.dsjk.boot.common.base.DataEntity;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -69,6 +72,8 @@ public class User extends DataEntity<User> {
         this.no = no;
     }
 
+    @NotEmpty
+    @Length(min = 2, max = 10, message = "姓名长度必须介于 2 和 10 之间")
     public String getName() {
         return name;
     }

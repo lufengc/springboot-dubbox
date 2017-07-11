@@ -1,5 +1,7 @@
 package com.dsjk.boot.common.base;
 
+import com.dsjk.boot.common.utils.JSONUtils;
+
 import java.io.Serializable;
 
 /**
@@ -39,7 +41,7 @@ public class Result implements Serializable {
         Result result = new Result();
         result.code = ResultCode.SUCCESS.getCode();
         result.message = ResultCode.SUCCESS.getMessage();
-        result.data = data;
+        result.data = JSONUtils.JSONFilter(data);
         return result;
     }
 
@@ -66,7 +68,7 @@ public class Result implements Serializable {
     }
 
     public void setData(Object data) {
-        this.data = data;
+        this.data = JSONUtils.JSONFilter(data);
     }
 
 
