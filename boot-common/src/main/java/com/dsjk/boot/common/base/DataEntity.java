@@ -3,7 +3,6 @@
  */
 package com.dsjk.boot.common.base;
 
-import com.alibaba.fastjson.annotation.JSONType;
 import com.dsjk.boot.common.utils.Encodes;
 import org.apache.commons.lang3.StringUtils;
 

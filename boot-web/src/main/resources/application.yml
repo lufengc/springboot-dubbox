@@ -13,11 +13,8 @@ spring:
   aop:
     proxy-target-class: true
 
-# dubbo
-dubbo:
-  application-name: web
-  annotation-package: com.dsjk.boot.web.user
-  protocol-name: dubbo
-  protocol-port: 20882
-  registry-protocol: zookeeper
-  registry-address: zookeeper://127.0.0.1:2181?register=false
+  # dubbo
+  dubbo:
+    application.name: web
+    registry.address: zookeeper://127.0.0.1:2181
+    scan: com.dsjk.boot.web.user
