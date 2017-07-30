@@ -1,4 +1,4 @@
-package com.dsjk.boot.common.base;
+package com.dsjk.boot.user.mapper;
 
 import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.common.MySqlMapper;

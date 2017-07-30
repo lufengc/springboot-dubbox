@@ -264,10 +264,10 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
     /**
      * 驼峰命名法工具
-     * @return
-     * 		toCamelCase("hello_world") == "helloWorld"
-     * 		toCapitalizeCamelCase("hello_world") == "HelloWorld"
-     * 		toUnderScoreCase("helloWorld") = "hello_world"
+     *
+     * @return toCamelCase("hello_world") == "helloWorld"
+     * toCapitalizeCamelCase("hello_world") == "HelloWorld"
+     * toUnderScoreCase("helloWorld") = "hello_world"
      */
     public static String toCamelCase(String s) {
         if (s == null) {
@@ -294,10 +294,10 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
     /**
      * 驼峰命名法工具
-     * @return
-     * 		toCamelCase("hello_world") == "helloWorld"
-     * 		toCapitalizeCamelCase("hello_world") == "HelloWorld"
-     * 		toUnderScoreCase("helloWorld") = "hello_world"
+     *
+     * @return toCamelCase("hello_world") == "helloWorld"
+     * toCapitalizeCamelCase("hello_world") == "HelloWorld"
+     * toUnderScoreCase("helloWorld") = "hello_world"
      */
     public static String toCapitalizeCamelCase(String s) {
         if (s == null) {
@@ -309,10 +309,10 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
     /**
      * 驼峰命名法工具
-     * @return
-     * 		toCamelCase("hello_world") == "helloWorld"
-     * 		toCapitalizeCamelCase("hello_world") == "HelloWorld"
-     * 		toUnderScoreCase("helloWorld") = "hello_world"
+     *
+     * @return toCamelCase("hello_world") == "helloWorld"
+     * toCapitalizeCamelCase("hello_world") == "HelloWorld"
+     * toUnderScoreCase("helloWorld") = "hello_world"
      */
     public static String toUnderScoreCase(String s) {
         if (s == null) {

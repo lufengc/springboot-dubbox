@@ -1,4 +1,4 @@
-package com.dsjk.boot.service.user;
+package com.dsjk.boot.user;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

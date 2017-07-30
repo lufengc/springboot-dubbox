@@ -2,9 +2,6 @@ package com.dsjk.boot.common.service.user;
 
 import com.dsjk.boot.common.base.Result;
 import com.dsjk.boot.common.bean.user.User;
-import com.github.pagehelper.PageInfo;
-
-import java.util.List;
 
 /**
  * @author fengcheng

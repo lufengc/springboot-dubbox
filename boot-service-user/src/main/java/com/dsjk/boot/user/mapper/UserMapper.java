@@ -1,6 +1,5 @@
-package com.dsjk.boot.service.user.mapper;
+package com.dsjk.boot.user.mapper;
 
-import com.dsjk.boot.common.base.CommonMapper;
 import com.dsjk.boot.common.bean.user.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;

@@ -9,8 +9,8 @@ package com.dsjk.boot.common.base;
 public enum ResultCode {
 
     SUCCESS("0", "处理成功"),
-    FAILD_PARAM("400", "参数错误"),
-    FAILD("10000", "处理失败"),;
+    FAILD("10000", "处理失败"),
+    FAILD_PARAM("20000", "参数错误");
 
     private String code;
     private String message;

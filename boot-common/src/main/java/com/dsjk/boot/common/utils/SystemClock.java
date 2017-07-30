@@ -81,8 +81,8 @@ public class SystemClock {
         return instance().currentTimeMillis();
     }
 
-	public static String nowDate() {
-		return new Timestamp(instance().currentTimeMillis()).toString();
-	}
+    public static String nowDate() {
+        return new Timestamp(instance().currentTimeMillis()).toString();
+    }
 
 }

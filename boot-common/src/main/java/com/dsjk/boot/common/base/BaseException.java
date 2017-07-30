@@ -12,9 +12,9 @@ package com.dsjk.boot.common.base;
  */
 public abstract class BaseException extends RuntimeException {
 
-	private static final long serialVersionUID = 1L;
-	
-	private Class<? extends BaseException> subClass;
+    private static final long serialVersionUID = 1L;
+
+    private Class<? extends BaseException> subClass;
 
     public Class<? extends BaseException> getSubClass() {
         return subClass;

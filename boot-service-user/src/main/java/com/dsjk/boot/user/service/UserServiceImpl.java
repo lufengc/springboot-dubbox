@@ -1,4 +1,4 @@
-package com.dsjk.boot.service.user.service;
+package com.dsjk.boot.user.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.dsjk.boot.common.base.Global;
@@ -8,7 +8,7 @@ import com.dsjk.boot.common.bean.user.User;
 import com.dsjk.boot.common.service.user.UserService;
 import com.dsjk.boot.common.utils.Encodes;
 import com.dsjk.boot.common.utils.StringUtils;
-import com.dsjk.boot.service.user.mapper.UserMapper;
+import com.dsjk.boot.user.mapper.UserMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;

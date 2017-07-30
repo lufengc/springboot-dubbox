@@ -33,7 +33,7 @@ mybatis:
 
 mapper:
   mappers:
-    - com.dsjk.boot.common.base.CommonMapper
+    - com.dsjk.boot.user.mapper.CommonMapper
   not-empty: false
   identity: MYSQL
 
@@ -50,4 +50,4 @@ spring:
     registry.address: zookeeper://127.0.0.1:2181
     protocol.name: dubbo
     protocol.port: 20881
-    scan: com.dsjk.boot.service.user.service
+    scan: com.dsjk.boot.user.service
