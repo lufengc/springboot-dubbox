@@ -76,4 +76,11 @@ public class UserServiceImpl implements UserService {
         }
         return Result.of(ResultCode.SUCCESS);
     }
+
+    @Override
+    public User getUserByLoginName(String loginName) {
+        User user = new User();
+        user.setLoginName(loginName);
+        return userMapper.selectOne(user);
+    }
 }

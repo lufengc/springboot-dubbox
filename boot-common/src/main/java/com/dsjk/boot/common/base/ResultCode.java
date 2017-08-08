@@ -10,7 +10,12 @@ public enum ResultCode {
 
     SUCCESS("0", "处理成功"),
     FAILD("10000", "处理失败"),
-    FAILD_PARAM("20000", "参数错误");
+    FAILD_PARAM("20000", "参数错误"),
+
+    INVALID_CLIENTID("30003", "Invalid clientid"),
+    INVALID_PASSWORD("30004", "User name or password is incorrect"),
+    INVALID_CAPTCHA("30005", "Invalid captcha or captcha overdue"),
+    INVALID_TOKEN("30006", "Invalid token"),;
 
     private String code;
     private String message;

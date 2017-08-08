@@ -17,4 +17,6 @@ public interface UserService {
     Result save(User user);
 
     Result delete(String ids);
+
+    User getUserByLoginName(String loginName);
 }
