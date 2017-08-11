@@ -6,7 +6,11 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author fengcheng
@@ -30,6 +34,11 @@ public class User extends DataEntity<User> {
     private Date loginDate;    // 最后登陆日期
     private String loginFlag;    // 是否允许登陆
     private String photo;    // 头像
+
+    @Transient
+    private Date lastPasswordResetDate;
+    @Transient
+    private List<String> roles = new ArrayList<>();
 
     public String getCompanyId() {
         return companyId;
@@ -143,5 +152,21 @@ public class User extends DataEntity<User> {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public List<String> getRoles() {
+        return Collections.singletonList("ROLE_ADMIN");
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
+    public Date getLastPasswordResetDate() {
+        return lastPasswordResetDate;
+    }
+
+    public void setLastPasswordResetDate(Date lastPasswordResetDate) {
+        this.lastPasswordResetDate = lastPasswordResetDate;
     }
 }

@@ -65,6 +65,9 @@ public class UserServiceImpl implements UserService {
             user.setCreateDate(user.getUpdateDate());
             userMapper.insertSelective(user);
         }
+        if (StringUtils.isNotBlank(user.getPassword())) {
+            user.setPassword(Encodes.encryptPassword(user.getPassword()));
+        }
         return Result.of(ResultCode.SUCCESS);
     }
 

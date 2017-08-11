@@ -23,11 +23,4 @@ spring:
   dubbo:
     application.name: web
     registry.address: zookeeper://127.0.0.1:2181
-    scan: com.dsjk.boot.web.user
-
-
-audience:
-  clientId: 098f6bcd4621d373cade4e832627b4f6
-  base64Secret: MDk4ZjZiY2Q0NjIxZDM3M2NhZGU0ZTgzMjYyN2I0ZjY=
-  name: restapiuser
-  expiresSecond: 172800
+    scan: com.dsjk.boot.web

@@ -8,12 +8,17 @@ import com.dsjk.boot.common.bean.user.LoginParam;
 import com.dsjk.boot.common.bean.user.User;
 import com.dsjk.boot.common.service.user.UserService;
 import com.dsjk.boot.common.utils.CaptchaUtils;
-import com.dsjk.boot.common.utils.Encodes;
-import com.dsjk.boot.web.config.Audience;
-import com.dsjk.boot.web.config.JwtHelper;
+import com.dsjk.boot.web.secruity.JwtTokenUtil;
+import com.dsjk.boot.web.secruity.JwtUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,13 +45,20 @@ public class LoginController {
     @Reference(group = Global.DUBBO_GROUP)
     private UserService userService;
 
-    private final Audience audience;
     private final RedisTemplate<String, String> redisTemplate;
+    private AuthenticationManager authenticationManager;
+    private UserDetailsService userDetailsService;
+    private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    public LoginController(Audience audience, RedisTemplate<String, String> redisTemplate) {
-        this.audience = audience;
+    public LoginController(RedisTemplate<String, String> redisTemplate,
+                           AuthenticationManager authenticationManager,
+                           UserDetailsService userDetailsService,
+                           JwtTokenUtil jwtTokenUtil) {
         this.redisTemplate = redisTemplate;
+        this.authenticationManager = authenticationManager;
+        this.userDetailsService = userDetailsService;
+        this.jwtTokenUtil = jwtTokenUtil;
     }
 
     @RequestMapping(value = "getCaptcha", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
@@ -76,50 +88,56 @@ public class LoginController {
     }
 
     @RequestMapping("doLogin")
-    public Object getAccessToken(LoginParam loginParam) {
+    public Result doLogin(LoginParam loginParam) {
 
         //验证码校验
-//        String captchaCode = loginParam.getCaptchaCode();
-//        if (captchaCode == null) {
-//            return Result.of(ResultCode.INVALID_CAPTCHA);
-//        }
-//        String captchaValue = redisTemplate.opsForValue().get(captchaCode);
-//        if (captchaValue == null) {
-//            return Result.of(ResultCode.INVALID_CAPTCHA);
-//        }
-//        redisTemplate.delete(captchaCode);
-//
-//        if (Objects.equals(captchaValue, loginParam.getCaptchaValue())) {
-//            return Result.of(ResultCode.INVALID_CAPTCHA);
-//        }
-
-
-        if (loginParam.getClientId() == null
-                || (loginParam.getClientId().compareTo(audience.getClientId()) != 0)) {
-            return Result.of(ResultCode.INVALID_CLIENTID);
+        /*String captchaCode = loginParam.getCaptchaCode();
+        if (captchaCode == null) {
+            return Result.of(ResultCode.INVALID_CAPTCHA);
         }
-
-        //验证用户名密码
-        User user = userService.getUserByLoginName(loginParam.getUserName());
-        if (user == null) {
-            return Result.of(ResultCode.INVALID_PASSWORD);
-        } else {
-            if (!Encodes.validatePassword(loginParam.getPassword(), user.getPassword())) {
-                return Result.of(ResultCode.INVALID_PASSWORD);
-            }
+        String captchaValue = redisTemplate.opsForValue().get(captchaCode);
+        if (captchaValue == null) {
+            return Result.of(ResultCode.INVALID_CAPTCHA);
         }
+        redisTemplate.delete(captchaCode);
 
-        //拼装accessToken
-        String token = JwtHelper.createJWT(loginParam.getUserName(), user.getId(),
-                "admin", audience.getClientId(), audience.getName(),
-                audience.getExpiresSecond() * 1000, audience.getBase64Secret());
+        if (Objects.equals(captchaValue, loginParam.getCaptchaValue())) {
+            return Result.of(ResultCode.INVALID_CAPTCHA);
+        }*/
 
-        //返回accessToken
+
+        UsernamePasswordAuthenticationToken upToken =
+                new UsernamePasswordAuthenticationToken(loginParam.getUserName(), loginParam.getPassword());
+        // Perform the security
+        final Authentication authentication = authenticationManager.authenticate(upToken);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        // Reload password post-security so we can generate token
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(loginParam.getUserName());
+        final String token = jwtTokenUtil.generateToken(userDetails);
+
         Map<String, Object> map = new HashMap<>();
         map.put("token", token);
-        map.put("tokenType", "bearer");
-        map.put("expiresIn", audience.getExpiresSecond());
+
         return Result.of(map);
+    }
+
+    @RequestMapping("register")
+    public Result register(User user) {
+        return userService.save(user);
+    }
+
+    @RequestMapping("refreshToken")
+    public Result refreshToken(HttpServletRequest request) {
+        String oldToken = request.getHeader(JwtTokenUtil.HEADER);
+        final String token = oldToken.substring(JwtTokenUtil.BEARER.length());
+        String username = jwtTokenUtil.getUsernameFromToken(token);
+        JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(username);
+        if (jwtTokenUtil.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {
+            String newToken = jwtTokenUtil.refreshToken(token);
+            return Result.of(newToken);
+        }
+        return Result.of(ResultCode.FAILD);
     }
 
 }
