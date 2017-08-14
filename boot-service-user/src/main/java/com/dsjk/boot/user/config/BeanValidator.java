@@ -1,6 +1,6 @@
 package com.dsjk.boot.user.config;
 
-import com.dsjk.boot.common.base.Global;
+import com.dsjk.boot.common.base.CommonException;
 import com.dsjk.boot.common.utils.BeanValidators;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class BeanValidator {
 
-    private static Logger logger = LoggerFactory.getLogger(Global.class);
+    private static Logger logger = LoggerFactory.getLogger(BeanValidator.class);
 
     /**
      * 验证Bean实例对象
@@ -36,7 +36,7 @@ public class BeanValidator {
             List<String> list = BeanValidators.extractPropertyAndMessageAsList(ex, ": ");
             list.add(0, "数据验证失败：");
             logger.info(list.toString());
-            return false;
+            throw new CommonException(list.toString());
         }
         return true;
     }

@@ -79,6 +79,12 @@
             <version>18.0</version>
         </dependency>
 
+        <!-- hibernate-validator -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+
         <!-- pojo copy -->
         <dependency>
             <groupId>net.sf.dozer</groupId>

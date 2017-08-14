@@ -74,6 +74,6 @@ public class JwtUser implements UserDetails {
 
     @JsonIgnore
     public Date getLastPasswordResetDate() {
-        return new Date();
+        return lastPasswordResetDate;
     }
 }

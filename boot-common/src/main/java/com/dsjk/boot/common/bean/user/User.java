@@ -35,7 +35,6 @@ public class User extends DataEntity<User> {
     private String loginFlag;    // 是否允许登陆
     private String photo;    // 头像
 
-    @Transient
     private Date lastPasswordResetDate;
     @Transient
     private List<String> roles = new ArrayList<>();
