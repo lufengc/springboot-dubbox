@@ -45,17 +45,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                // 由于使用的是JWT，我们这里不需要csrf
+                // we don't need CSRF because our token is invulnerable
                 .csrf().disable()
 
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 
-                // 基于token，所以不需要session
+                // don't create session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 
                 .authorizeRequests()
 
-                // 允许对于网站静态资源的无授权访问
+                // allow anonymous resource requests
                 .antMatchers(
                         HttpMethod.GET,
                         "/",
@@ -70,10 +70,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated();
 
-        // 添加JWT filter
+        // Custom JWT based security filter
         httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 
-        // 禁用缓存
+        // disable page caching
         httpSecurity.headers().cacheControl();
     }
 }

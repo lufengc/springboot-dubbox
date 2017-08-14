@@ -4,7 +4,6 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.dsjk.boot.common.base.Global;
 import com.dsjk.boot.common.base.Result;
 import com.dsjk.boot.common.base.ResultCode;
-import com.dsjk.boot.common.bean.user.LoginParam;
 import com.dsjk.boot.common.bean.user.User;
 import com.dsjk.boot.common.service.user.UserService;
 import com.dsjk.boot.common.utils.CaptchaUtils;
@@ -14,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -88,7 +88,7 @@ public class LoginController {
     }
 
     @RequestMapping("doLogin")
-    public Result doLogin(LoginParam loginParam) {
+    public Result doLogin(String loginName, String password, String captchaCode, String captchaValue) {
 
         //验证码校验
         /*String captchaCode = loginParam.getCaptchaCode();
@@ -106,14 +106,18 @@ public class LoginController {
         }*/
 
 
-        UsernamePasswordAuthenticationToken upToken =
-                new UsernamePasswordAuthenticationToken(loginParam.getUserName(), loginParam.getPassword());
         // Perform the security
-        final Authentication authentication = authenticationManager.authenticate(upToken);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        try {
+            final Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginName, password));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        } catch (Exception e) {
+            if (e instanceof BadCredentialsException) {
+                return Result.of(ResultCode.INVALID_PASSWORD);
+            }
+        }
 
         // Reload password post-security so we can generate token
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(loginParam.getUserName());
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(loginName);
         final String token = jwtTokenUtil.generateToken(userDetails);
 
         Map<String, Object> map = new HashMap<>();

@@ -5,6 +5,7 @@
 - 前后端分离
 - 前端管理项目 https://github.com/lufengc/springboot-dubbox-web
 - spring-security基于角色的权限管理
+- JWT (Json Web Token) with Spring Security
 - 统一异常管理
 - spring-data-redis整合
 - 整合swagger-ui接口文档
