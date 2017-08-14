@@ -8,6 +8,7 @@ import com.dsjk.boot.common.bean.user.User;
 import com.dsjk.boot.common.service.user.UserService;
 import com.dsjk.boot.common.utils.Encodes;
 import com.dsjk.boot.common.utils.StringUtils;
+import com.dsjk.boot.user.config.BeanValidator;
 import com.dsjk.boot.user.mapper.UserMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -51,7 +52,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public Result save(User user) {
-        if (!Global.beanValidator(user)) {
+        if (!BeanValidator.beanValidator(user)) {
             return Result.of(ResultCode.FAILD_PARAM);
         }
         if (StringUtils.isNotEmpty(user.getId())) {

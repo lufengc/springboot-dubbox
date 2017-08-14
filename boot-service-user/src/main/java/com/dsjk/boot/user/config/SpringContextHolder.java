@@ -2,7 +2,7 @@
  * Copyright (c) 2017. <a href="http://www.lufengc.com">lufengc</a> All rights reserved.
  */
 
-package com.dsjk.boot.common.base;
+package com.dsjk.boot.user.config;
 
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.DisposableBean;
@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 /**
  * 以静态变量保存Spring ApplicationContext, 可在任何代码任何地方任何时候取出ApplicaitonContext.
  *
- * @author Zaric
- * @version 2013-5-29
+ * @author fengcheng
+ * @version 2017/2/28
  */
 @Service
 @Lazy(false)

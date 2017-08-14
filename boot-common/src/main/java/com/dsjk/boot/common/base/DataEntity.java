@@ -14,7 +14,6 @@ import java.util.Date;
  * @author lufengc
  * @version 2017/2/28
  */
-//@JSONType(ignores={"remarks","createBy","createDate","updateBy","updateDate","delFlag"})
 public abstract class DataEntity<T> extends BaseEntity<T> {
 
     private static final long serialVersionUID = 1L;

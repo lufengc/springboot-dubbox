@@ -16,12 +16,6 @@
             <groupId>com.dsjk</groupId>
             <artifactId>boot-common</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.mybatis.spring.boot</groupId>
-                    <artifactId>mybatis-spring-boot-starter</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
 
