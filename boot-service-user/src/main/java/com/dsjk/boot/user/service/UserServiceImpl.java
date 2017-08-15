@@ -32,13 +32,15 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Result get(String id) {
-        return Result.of(userMapper.selectByPrimaryKey(id));
+    public User get(String id) {
+        return userMapper.selectByPrimaryKey(id);
     }
 
     @Override
-    public Result getList(User user) {
-        return Result.of(userMapper.select(user));
+    public User getUserByLoginName(String loginName) {
+        User user = new User();
+        user.setLoginName(loginName);
+        return userMapper.selectOne(user);
     }
 
     @Override
@@ -72,19 +74,5 @@ public class UserServiceImpl implements UserService {
         return Result.of(ResultCode.SUCCESS);
     }
 
-    @Override
-    @Transactional
-    public Result delete(String ids) {
-        for (String id : ids.split(",")) {
-            userMapper.deleteByPrimaryKey(id);
-        }
-        return Result.of(ResultCode.SUCCESS);
-    }
 
-    @Override
-    public User getUserByLoginName(String loginName) {
-        User user = new User();
-        user.setLoginName(loginName);
-        return userMapper.selectOne(user);
-    }
 }

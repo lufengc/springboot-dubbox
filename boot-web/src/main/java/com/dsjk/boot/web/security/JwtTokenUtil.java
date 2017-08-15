@@ -1,4 +1,4 @@
-package com.dsjk.boot.web.secruity;
+package com.dsjk.boot.web.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -11,6 +11,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author fengcheng
+ * @version 2017/8/8
+ */
 @Component
 public class JwtTokenUtil implements Serializable {
 
@@ -116,7 +120,6 @@ public class JwtTokenUtil implements Serializable {
         JwtUser user = (JwtUser) userDetails;
         final String username = getUsernameFromToken(token);
         final Date created = getCreatedDateFromToken(token);
-        //final Date expiration = getExpirationDateFromToken(token);
         return (
                 username.equals(user.getUsername())
                         && !isTokenExpired(token)

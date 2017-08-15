@@ -1,4 +1,4 @@
-package com.dsjk.boot.web.secruity;
+package com.dsjk.boot.web.security;
 
 import com.dsjk.boot.common.utils.Encodes;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -7,9 +7,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * 自定义加密方式
  *
  * @author fengcheng
- * @version 2017/8/11
+ * @version 2017/8/8
  */
-public class HaPasswordEncoder implements PasswordEncoder {
+public class ShaPasswordEncoder implements PasswordEncoder {
     @Override
     public String encode(CharSequence rawPassword) {
         return Encodes.encryptPassword(rawPassword.toString());

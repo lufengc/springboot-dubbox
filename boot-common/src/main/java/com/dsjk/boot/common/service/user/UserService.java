@@ -8,15 +8,11 @@ import com.dsjk.boot.common.bean.user.User;
  * @version 2017/4/17
  */
 public interface UserService {
-    Result get(String id);
+    User get(String id);
 
-    Result getList(User user);
+    User getUserByLoginName(String loginName);
 
     Result getPage(User user);
 
     Result save(User user);
-
-    Result delete(String ids);
-
-    User getUserByLoginName(String loginName);
 }

@@ -1,4 +1,4 @@
-package com.dsjk.boot.web.secruity;
+package com.dsjk.boot.web.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,6 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @author fengcheng
+ * @version 2017/8/8
+ */
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 

@@ -1,4 +1,4 @@
-package com.dsjk.boot.web.secruity;
+package com.dsjk.boot.web.security;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.dsjk.boot.common.base.Global;
@@ -9,6 +9,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author fengcheng
+ * @version 2017/8/8
+ */
 @Service
 public class JwtUserDetailsServiceImpl implements UserDetailsService {
 
