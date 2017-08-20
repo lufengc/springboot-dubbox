@@ -9,7 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * @author fengcheng
  * @version 2017/8/8
  */
-public class ShaPasswordEncoder implements PasswordEncoder {
+public class JwtPasswordEncoder implements PasswordEncoder {
     @Override
     public String encode(CharSequence rawPassword) {
         return Encodes.encryptPassword(rawPassword.toString());

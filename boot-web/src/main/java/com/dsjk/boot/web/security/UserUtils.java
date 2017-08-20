@@ -20,6 +20,15 @@ public class UserUtils {
     private static UserService userService;
 
     /**
+     * 获取用户信息
+     *
+     * @return 用户信息
+     */
+    public static User getUserByLoginName(String loginName) {
+        return userService.getUserByLoginName(loginName);
+    }
+
+    /**
      * 获取当前用户信息
      *
      * @return 用户信息
@@ -29,4 +38,5 @@ public class UserUtils {
         JwtUser jwtUser = (JwtUser) authentication.getPrincipal();
         return userService.get(jwtUser.getId());
     }
+
 }

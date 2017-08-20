@@ -72,7 +72,7 @@ public class LoginController {
         Map<String, Object> image = CaptchaUtils.createImage(width, height);
 
         //将验证码以<key,value>形式缓存到redis
-        redisTemplate.opsForValue().set(uuid, (String) image.get("code"), 3 * 60, TimeUnit.SECONDS);
+        //redisTemplate.opsForValue().set(uuid, (String) image.get("code"), 3 * 60, TimeUnit.SECONDS);
 
         //将验证码key，及验证码的图片返回
         Cookie cookie = new Cookie("CaptchaCode", uuid);
