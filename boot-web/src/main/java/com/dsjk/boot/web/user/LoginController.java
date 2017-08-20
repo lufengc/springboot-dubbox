@@ -10,6 +10,7 @@ import com.dsjk.boot.common.utils.CaptchaUtils;
 import com.dsjk.boot.web.security.JwtTokenUtil;
 import com.dsjk.boot.web.security.JwtUser;
 import com.dsjk.boot.web.security.RequestLimit;
+import com.dsjk.boot.web.security.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -92,21 +93,9 @@ public class LoginController {
     @RequestMapping("doLogin")
     public Result doLogin(String loginName, String password, String captchaCode, String captchaValue) {
 
-        //验证码校验
-        /*String captchaCode = loginParam.getCaptchaCode();
-        if (captchaCode == null) {
+        if (!UserUtils.checkCaptcha(captchaCode, captchaValue)) {
             return Result.of(ResultCode.INVALID_CAPTCHA);
         }
-        String captchaValue = redisTemplate.opsForValue().get(captchaCode);
-        if (captchaValue == null) {
-            return Result.of(ResultCode.INVALID_CAPTCHA);
-        }
-        redisTemplate.delete(captchaCode);
-
-        if (Objects.equals(captchaValue, loginParam.getCaptchaValue())) {
-            return Result.of(ResultCode.INVALID_CAPTCHA);
-        }*/
-
 
         // Perform the security
         try {

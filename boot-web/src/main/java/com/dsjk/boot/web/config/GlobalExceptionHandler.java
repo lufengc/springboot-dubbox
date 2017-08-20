@@ -5,7 +5,6 @@ import com.dsjk.boot.common.base.Result;
 import com.dsjk.boot.common.base.ResultCode;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,13 +19,13 @@ import java.util.List;
 public class GlobalExceptionHandler {
 
     @ResponseBody
-    @ExceptionHandler({RuntimeException.class,BindException.class})
+    @ExceptionHandler({RuntimeException.class, BindException.class})
     public Result exceptionHandler(Exception e) {
         e.printStackTrace();
         Result result;
         if (e instanceof ParamException) {
             result = Result.of(ResultCode.FAILD_PARAM);
-        }else if (e instanceof BindException){
+        } else if (e instanceof BindException) {
             result = Result.of(ResultCode.FAILD_PARAM);
             List<FieldError> fieldErrors = ((BindException) e).getBindingResult().getFieldErrors();
             StringBuilder errorMessage = new StringBuilder();

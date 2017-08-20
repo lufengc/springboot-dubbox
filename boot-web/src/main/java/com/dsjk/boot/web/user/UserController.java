@@ -1,11 +1,11 @@
 package com.dsjk.boot.web.user;
 
-import com.alibaba.dubbo.common.json.JSON;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.dsjk.boot.common.base.Global;
 import com.dsjk.boot.common.base.Result;
 import com.dsjk.boot.common.bean.user.User;
 import com.dsjk.boot.common.service.user.UserService;
+import com.dsjk.boot.common.utils.StringUtils;
 import com.dsjk.boot.web.base.BaseController;
 import com.dsjk.boot.web.security.UserUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,9 +25,11 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public Result get(String id) throws Exception {
-        User user = UserUtils.getUser();
-        logger.info(JSON.json(user));
-        return Result.of(userService.get(id));
+        if (StringUtils.isNotEmpty(id)) {
+            return Result.of(userService.get(id));
+        } else {
+            return Result.of(UserUtils.getUser());
+        }
     }
 
     @RequestMapping(value = "/page", method = RequestMethod.GET)
