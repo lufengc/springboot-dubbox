@@ -7,7 +7,6 @@ import com.dsjk.boot.common.base.ResultCode;
 import com.dsjk.boot.common.bean.user.User;
 import com.dsjk.boot.common.service.user.UserService;
 import com.dsjk.boot.common.utils.Encodes;
-import com.dsjk.boot.common.utils.StringUtils;
 import com.dsjk.boot.user.config.BeanValidator;
 import com.dsjk.boot.user.mapper.UserMapper;
 import com.github.pagehelper.PageHelper;
@@ -16,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
 
@@ -53,24 +53,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public Result save(User user) {
-        if (!BeanValidator.beanValidator(user)) {
-            return Result.of(ResultCode.FAILD_PARAM);
-        }
-        if (StringUtils.isNotEmpty(user.getId())) {
-            user.preUpdate(user.getId());
-            userMapper.updateByPrimaryKeySelective(user);
-        } else {
-            user.setId(Encodes.uuid());
-            user.setUpdateBy(user.getId());
-            user.setCreateBy(user.getId());
-            user.setUpdateDate(new Date());
-            user.setCreateDate(user.getUpdateDate());
-            userMapper.insertSelective(user);
-        }
-        if (StringUtils.isNotBlank(user.getPassword())) {
-            user.setPassword(Encodes.encryptPassword(user.getPassword()));
-        }
+    public Result register(User user) {
+        BeanValidator.beanValidator(user);
+        user.setId(Encodes.uuid());
+        user.setPassword(Encodes.encryptPassword(user.getPassword()));
+        user.setUpdateDate(new Date());
+        user.setCreateDate(user.getUpdateDate());
+        userMapper.insertSelective(user);
         return Result.of(ResultCode.SUCCESS);
     }
 

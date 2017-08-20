@@ -12,7 +12,6 @@ import com.dsjk.boot.web.security.JwtUser;
 import com.dsjk.boot.web.security.RequestLimit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -28,6 +27,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -129,8 +129,8 @@ public class LoginController {
     }
 
     @RequestMapping("register")
-    public Result register(User user) {
-        return userService.save(user);
+    public Result register(@Valid User user) {
+        return userService.register(user);
     }
 
     @RequestMapping("refreshToken")

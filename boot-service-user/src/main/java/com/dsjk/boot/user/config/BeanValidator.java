@@ -1,6 +1,6 @@
 package com.dsjk.boot.user.config;
 
-import com.dsjk.boot.common.base.CommonException;
+import com.dsjk.boot.common.base.ParamException;
 import com.dsjk.boot.common.utils.BeanValidators;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +27,7 @@ public class BeanValidator {
      *
      * @param object 验证的实体对象
      * @param groups 验证组,不传入此参数时，同@Valid注解验证
-     * @return 验证成功：返回true；严重失败：将错误信息添加到 message 中
+     * @return 验证成功：返回true；严重失败：将错误信息添加到 message 中，并抛出异常
      */
     public static boolean beanValidator(Object object, Class<?>... groups) {
         try {
@@ -35,8 +35,7 @@ public class BeanValidator {
         } catch (ConstraintViolationException ex) {
             List<String> list = BeanValidators.extractPropertyAndMessageAsList(ex, ": ");
             list.add(0, "数据验证失败：");
-            logger.info(list.toString());
-            throw new CommonException(list.toString());
+            throw new ParamException(list.toString());
         }
         return true;
     }

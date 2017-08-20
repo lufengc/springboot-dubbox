@@ -14,5 +14,5 @@ public interface UserService {
 
     Result getPage(User user);
 
-    Result save(User user);
+    Result register(User user);
 }

@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -55,6 +56,8 @@ public class User extends DataEntity<User> {
         this.officeId = officeId;
     }
 
+    @NotEmpty
+    @Pattern(regexp = "1(3[0-9]|4[57]|5[0-35-9]|7[01678]|8[0-9])\\d{8}", message = "手机号码格式错误")
     public String getLoginName() {
         return loginName;
     }
@@ -63,6 +66,8 @@ public class User extends DataEntity<User> {
         this.loginName = loginName;
     }
 
+    @NotEmpty
+    @Length(min = 4, max = 16, message = "密码长度必须介于 4 和 16 之间")
     public String getPassword() {
         return password;
     }
@@ -79,8 +84,6 @@ public class User extends DataEntity<User> {
         this.no = no;
     }
 
-    @NotEmpty
-    @Length(min = 2, max = 10, message = "姓名长度必须介于 2 和 10 之间")
     public String getName() {
         return name;
     }

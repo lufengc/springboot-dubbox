@@ -1,12 +1,12 @@
 package com.dsjk.boot.web.security;
 
-import com.dsjk.boot.common.base.CommonException;
+import com.dsjk.boot.common.base.BaseException;
 
 /**
  * @author fengcheng
  * @version 2017/8/8
  */
-public class RequestLimitException extends CommonException {
+public class RequestLimitException extends BaseException {
 
     private static final long serialVersionUID = 1L;
 
