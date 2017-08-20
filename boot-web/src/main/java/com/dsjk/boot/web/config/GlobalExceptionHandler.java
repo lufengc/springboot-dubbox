@@ -17,7 +17,9 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public Result exceptionHandler(RuntimeException runtimeException) {
         runtimeException.printStackTrace();
-        return Result.of(ResultCode.FAILD);
+        Result result = Result.of(ResultCode.FAILD);
+        result.setData(runtimeException.getMessage());
+        return result;
     }
 
 }

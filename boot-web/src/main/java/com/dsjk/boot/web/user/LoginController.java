@@ -9,6 +9,7 @@ import com.dsjk.boot.common.service.user.UserService;
 import com.dsjk.boot.common.utils.CaptchaUtils;
 import com.dsjk.boot.web.security.JwtTokenUtil;
 import com.dsjk.boot.web.security.JwtUser;
+import com.dsjk.boot.web.security.RequestLimit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.MediaType;
@@ -61,7 +62,8 @@ public class LoginController {
         this.jwtTokenUtil = jwtTokenUtil;
     }
 
-    @RequestMapping(value = "getCaptcha", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
+    @RequestLimit(count = 3)
+    @RequestMapping(value = "getCaptcha", method = RequestMethod.GET)
     public void getCaptcha(HttpServletResponse response, HttpServletRequest request) throws IOException {
         String width = request.getParameter("width");
         String height = request.getParameter("height");
@@ -72,7 +74,7 @@ public class LoginController {
         Map<String, Object> image = CaptchaUtils.createImage(width, height);
 
         //将验证码以<key,value>形式缓存到redis
-        //redisTemplate.opsForValue().set(uuid, (String) image.get("code"), 3 * 60, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(uuid, (String) image.get("code"), 3 * 60, TimeUnit.SECONDS);
 
         //将验证码key，及验证码的图片返回
         Cookie cookie = new Cookie("CaptchaCode", uuid);
