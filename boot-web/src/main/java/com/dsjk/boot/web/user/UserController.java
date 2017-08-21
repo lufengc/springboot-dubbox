@@ -37,4 +37,9 @@ public class UserController extends BaseController {
         return userService.getPage(user);
     }
 
+    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    public Result updateUser(User user) throws Exception {
+        return userService.updateUser(user);
+    }
+
 }

@@ -15,4 +15,8 @@ public interface UserService {
     Result getPage(User user);
 
     Result register(User user);
+
+    Result updateUser(User user);
+
+    Result forgetPassword(User user);
 }

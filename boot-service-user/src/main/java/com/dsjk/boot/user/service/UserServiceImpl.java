@@ -62,5 +62,23 @@ public class UserServiceImpl implements UserService {
         return Result.of(ResultCode.SUCCESS);
     }
 
+    @Override
+    public Result updateUser(User user) {
+        BeanValidator.beanValidator(user);
+        user.setUpdateDate(new Date());
+        userMapper.updateByPrimaryKeySelective(user);
+        return Result.of(ResultCode.SUCCESS);
+    }
+
+    @Override
+    public Result forgetPassword(User user) {
+        user.setPassword(Encodes.encryptPassword(user.getPassword()));
+        user.setUpdateDate(new Date());
+        Example example = new Example(User.class);
+        example.createCriteria().andEqualTo("loginName", user.getLoginName());
+        userMapper.updateByExampleSelective(user, example);
+        return Result.of(ResultCode.SUCCESS);
+    }
+
 
 }

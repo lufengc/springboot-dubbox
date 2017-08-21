@@ -64,7 +64,7 @@ public class LoginController {
     }
 
     @RequestLimit(count = 3)
-    @RequestMapping(value = "getCaptcha", method = RequestMethod.GET)
+    @RequestMapping(value = "/getCaptcha", method = RequestMethod.GET)
     public void getCaptcha(HttpServletResponse response, HttpServletRequest request) throws IOException {
         String width = request.getParameter("width");
         String height = request.getParameter("height");
@@ -90,7 +90,7 @@ public class LoginController {
 
     }
 
-    @RequestMapping("doLogin")
+    @RequestMapping("/doLogin")
     public Result doLogin(String loginName, String password, String captchaCode, String captchaValue) {
 
         if (!UserUtils.checkCaptcha(captchaCode, captchaValue)) {
@@ -117,12 +117,20 @@ public class LoginController {
         return Result.of(map);
     }
 
-    @RequestMapping("register")
+    @RequestMapping("/register")
     public Result register(@Valid User user) {
         return userService.register(user);
     }
 
-    @RequestMapping("refreshToken")
+    @RequestMapping("/forgetPassword")
+    public Result forgetPassword(User user, String captchaCode, String captchaValue) {
+        if (!UserUtils.checkCaptcha(captchaCode, captchaValue)) {
+            return Result.of(ResultCode.INVALID_CAPTCHA);
+        }
+        return userService.forgetPassword(user);
+    }
+
+    @RequestMapping("/refreshToken")
     public Result refreshToken(HttpServletRequest request) {
         String oldToken = request.getHeader(JwtTokenUtil.HEADER);
         final String token = oldToken.substring(JwtTokenUtil.BEARER.length());
