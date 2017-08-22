@@ -4,6 +4,8 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.dsjk.boot.common.base.Global;
 import com.dsjk.boot.common.base.Result;
 import com.dsjk.boot.common.base.ResultCode;
+import com.dsjk.boot.common.bean.user.Menu;
+import com.dsjk.boot.common.bean.user.Role;
 import com.dsjk.boot.common.bean.user.User;
 import com.dsjk.boot.common.service.user.UserService;
 import com.dsjk.boot.common.utils.Encodes;
@@ -33,6 +35,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public User get(String id) {
         return userMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Role> getRoleByUserId(String userId) {
+        return userMapper.selectRoleByUserId(userId);
+    }
+
+    @Override
+    public List<Menu> getMenuByUserId(String userId) {
+        return userMapper.selectMenuByUserId(userId);
     }
 
     @Override

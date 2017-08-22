@@ -93,9 +93,9 @@ public class LoginController {
     @RequestMapping("/doLogin")
     public Result doLogin(String loginName, String password, String captchaCode, String captchaValue) {
 
-        if (!UserUtils.checkCaptcha(captchaCode, captchaValue)) {
+        /*if (!UserUtils.checkCaptcha(captchaCode, captchaValue)) {
             return Result.of(ResultCode.INVALID_CAPTCHA);
-        }
+        }*/
 
         // Perform the security
         try {

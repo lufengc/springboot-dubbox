@@ -2,14 +2,14 @@ package com.dsjk.boot.common.bean.user;
 
 
 import com.dsjk.boot.common.base.DataEntity;
+import com.dsjk.boot.common.base.Global;
+import com.google.common.collect.Lists;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Pattern;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -35,10 +35,36 @@ public class User extends DataEntity<User> {
     private Date loginDate;    // 最后登陆日期
     private String loginFlag;    // 是否允许登陆
     private String photo;    // 头像
+    private Date lastPasswordResetDate; //最后一次密码重置时间
 
-    private Date lastPasswordResetDate;
     @Transient
-    private List<String> roles = new ArrayList<>();
+    private List<Role> roleList = Lists.newArrayList(); // 拥有角色列表
+
+    /**
+     * 删除标记（0：正常；1：删除；2：审核；）
+     */
+    public static final String DEL_FLAG_NORMAL = "0";
+    public static final String DEL_FLAG_DELETE = "1";
+    public static final String DEL_FLAG_AUDIT = "2";
+    public static final String DEL_FLAG_LOCK = "3";
+
+    public User() {
+        super();
+        this.loginFlag = Global.YES;
+    }
+
+    public User(String id) {
+        super(id);
+    }
+
+    public User(String id, String loginName) {
+        super(id);
+        this.loginName = loginName;
+    }
+
+    public User(Role role) {
+        super();
+    }
 
     public String getCompanyId() {
         return companyId;
@@ -156,12 +182,23 @@ public class User extends DataEntity<User> {
         this.photo = photo;
     }
 
-    public List<String> getRoles() {
-        return Collections.singletonList("ROLE_ADMIN");
+    public List<Role> getRoleList() {
+        return roleList;
     }
 
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
+    }
+
+    /**
+     * 用户拥有的角色名称字符串, 多个角色名称用','分隔.
+     */
+    public List<String> getRoleNames() {
+        List<String> roleNames = Lists.newArrayList();
+        for (Role role : roleList) {
+            roleNames.add(role.getEnname());
+        }
+        return roleNames;
     }
 
     public Date getLastPasswordResetDate() {

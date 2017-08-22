@@ -1,7 +1,11 @@
 package com.dsjk.boot.common.service.user;
 
 import com.dsjk.boot.common.base.Result;
+import com.dsjk.boot.common.bean.user.Menu;
+import com.dsjk.boot.common.bean.user.Role;
 import com.dsjk.boot.common.bean.user.User;
+
+import java.util.List;
 
 /**
  * @author fengcheng
@@ -9,6 +13,10 @@ import com.dsjk.boot.common.bean.user.User;
  */
 public interface UserService {
     User get(String id);
+
+    List<Role> getRoleByUserId(String userId);
+
+    List<Menu> getMenuByUserId(String userId);
 
     User getUserByLoginName(String loginName);
 
