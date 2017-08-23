@@ -8,6 +8,7 @@ import com.dsjk.boot.common.service.user.UserService;
 import com.dsjk.boot.common.utils.StringUtils;
 import com.dsjk.boot.web.base.BaseController;
 import com.dsjk.boot.web.security.UserUtils;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +24,7 @@ public class UserController extends BaseController {
     @Reference(group = Global.DUBBO_GROUP)
     private UserService userService;
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public Result get(String id) throws Exception {
         if (StringUtils.isNotEmpty(id)) {
