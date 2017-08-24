@@ -41,7 +41,7 @@ public class UserUtils {
             cacheCaptchaValue = redisTemplate.opsForValue().get(captchaCode);
             redisTemplate.delete(captchaCode);
         }
-        return Objects.equals(cacheCaptchaValue.toLowerCase(), captchaValue.toLowerCase());
+        return captchaValue != null && Objects.equals(cacheCaptchaValue.toLowerCase(), captchaValue.toLowerCase());
     }
 
     /**
