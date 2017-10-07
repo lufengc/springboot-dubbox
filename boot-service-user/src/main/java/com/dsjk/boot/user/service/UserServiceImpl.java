@@ -1,6 +1,7 @@
 package com.dsjk.boot.user.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.bdfint.datasource.TargetDataSource;
 import com.dsjk.boot.common.base.Global;
 import com.dsjk.boot.common.base.Result;
 import com.dsjk.boot.common.base.ResultCode;
@@ -48,6 +49,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @TargetDataSource("datasource")
     public User getUserByLoginName(String loginName) {
         User user = new User();
         user.setLoginName(loginName);
