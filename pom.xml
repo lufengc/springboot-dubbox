@@ -12,7 +12,6 @@
         <module>boot-common</module>
         <module>boot-service-user</module>
         <module>boot-web</module>
-        <module>boot-gateway</module>
         <module>spring-boot-starter-dubbo</module>
         <module>dynamic-datasource</module>
     </modules>
