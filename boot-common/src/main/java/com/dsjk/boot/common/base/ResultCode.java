@@ -8,14 +8,13 @@ package com.dsjk.boot.common.base;
  */
 public enum ResultCode {
 
-    SUCCESS("0", "处理成功"),
-    FAILD("10000", "处理失败"),
-    FAILD_PARAM("20000", "参数错误"),
+    SUCCESS("200", "处理成功"),
+    FAILD_PARAM("400", "参数错误"),
+    FAILD_PERMISSION("401", "没有权限"),
+    FAILD("500", "处理失败"),
 
-    INVALID_CLIENTID("30003", "Invalid clientid"),
-    INVALID_PASSWORD("30004", "User name or password is incorrect"),
-    INVALID_CAPTCHA("30005", "Invalid captcha or captcha overdue"),
-    INVALID_TOKEN("30006", "Invalid token"),;
+    INVALID_PASSWORD("10001", "登录名或密码错误"),
+    INVALID_CAPTCHA("10002", "无效的验证码或验证码过期"),;
 
     private String code;
     private String message;

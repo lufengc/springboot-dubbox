@@ -3,6 +3,7 @@ package com.dsjk.boot.web.config;
 import com.dsjk.boot.common.base.ParamException;
 import com.dsjk.boot.common.base.Result;
 import com.dsjk.boot.common.base.ResultCode;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -25,6 +26,8 @@ public class GlobalExceptionHandler {
         Result result;
         if (e instanceof ParamException) {
             result = Result.of(ResultCode.FAILD_PARAM);
+        } else if (e instanceof AccessDeniedException) {
+            result = Result.of(ResultCode.FAILD_PERMISSION);
         } else if (e instanceof BindException) {
             result = Result.of(ResultCode.FAILD_PARAM);
             List<FieldError> fieldErrors = ((BindException) e).getBindingResult().getFieldErrors();
