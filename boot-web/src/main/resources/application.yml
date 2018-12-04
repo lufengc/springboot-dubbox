@@ -2,7 +2,7 @@ logging:
   file: logs/boot-web.log
   level:
     root: info
-    com.dsjk.boot.web: debug
+    com.cheng.boot.web: debug
 
 server:
   port: 7777
@@ -23,4 +23,4 @@ spring:
   dubbo:
     application.name: web
     registry.address: zookeeper://127.0.0.1:2181
-    scan: com.dsjk.boot.web
+    scan: com.cheng.boot.web

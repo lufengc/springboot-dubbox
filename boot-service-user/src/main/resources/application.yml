@@ -3,18 +3,18 @@ logging:
   file: logs/boot-service-user.log
   level:
     root: info
-    com.dsjk.boot.service.user: debug
-    com.bdfint.datasource: debug
+    com.cheng.boot.service.user: debug
+    com.cheng.datasource: debug
 
 # MyBatis
 mybatis:
-  type-aliases-package: com.dsjk.boot.common.bean
+  type-aliases-package: com.cheng.boot.common.bean
   configuration:
     map-underscore-to-camel-case: true
 
 mapper:
   mappers:
-    - com.dsjk.boot.user.mapper.CommonMapper
+    - com.cheng.boot.user.mapper.CommonMapper
   not-empty: false
   identity: MYSQL
 
@@ -31,7 +31,7 @@ spring:
     registry.address: zookeeper://127.0.0.1:2181
     protocol.name: dubbo
     protocol.port: 20881
-    scan: com.dsjk.boot.user.service
+    scan: com.cheng.boot.user.service
 
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
